@@ -14,7 +14,7 @@ module INWX
       params = { :user => username, :pass => password, 'lang' => language }
       ret = call("account","login",params)
       cookie = client.cookie
-      if cookie.length > 2
+      unless cookie.nil? || cookie.length <= 2
         setCookie(cookie)
       end
       return ret

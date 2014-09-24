@@ -1,4 +1,5 @@
-require "inwx/Domrobot"
+#!/usr/bin/env ruby
+require "./inwx/Domrobot"
 require "yaml"
 
 addr = "api.ote.domrobot.com"
