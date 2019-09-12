@@ -16,31 +16,43 @@ You can view a detailed description of the API functions in our documentation. Y
 
 If you still experience any kind of problems don't hesitate to contact our [support via email](mailto:support@inwx.de).
 
+Installation
+-------
+
+```bash
+gem install inwx-domrobot
+```
+
 Example
 -------
 
 ```ruby
-require "inwx/Domrobot"
-require "yaml"
+require 'inwx-domrobot'
+require 'pp'
 
-addr = "api.ote.domrobot.com"
-# addr = "api.domrobot.com"
-user = "your_username"
-pass = "your_password"
+user = ''
+pass = ''
 
-domrobot = INWX::Domrobot.new(addr)
+domrobot = INWX::Domrobot.new
 
-result = domrobot.login(user,pass)
-puts YAML::dump(result)
+result = domrobot.set_language('en').
+         use_ote.
+         use_json.
+         set_debug(true).
+         login(user, pass)
 
-object = "domain"
-method = "check"
+object = 'domain'
+method = 'check'
 
-params = { :domain => "mydomain.com" }
+params = { domain: 'mydomain.com' }
 
-result = domrobot.call(object, method, params)
+if result['code'] == 1000
+  result = domrobot.call(object, method, params)
 
-puts YAML::dump(result)
+  domrobot.logout
+end
+
+pp result
 ```
 
 You can also look at the example.rb in the Project.
