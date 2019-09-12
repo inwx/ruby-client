@@ -1,22 +1,38 @@
 #!/usr/bin/env ruby
-require "./inwx/Domrobot"
-require "yaml"
+# frozen_string_literal: true
 
-addr = "api.ote.domrobot.com"
-# addr = "api.domrobot.com"
-user = "your_username"
-pass = "your_password"
+require 'inwx-domrobot'
+require 'pp'
 
-domrobot = INWX::Domrobot.new(addr)
+# Get your credentials from a safe place when using in production
+user = ''
+pass = ''
 
-result = domrobot.login(user,pass)
-puts YAML::dump(result)
+domrobot = INWX::Domrobot.new
 
-object = "domain"
-method = "check"
+result = domrobot.set_language('en').
+         # use the OTE endpoint
+         use_ote.
+         # or use the LIVE endpoint instead
+         # use_live.
+         # use the JSON-RPC API
+         use_json.
+         # or use the XML-RPC API instead
+         # use_xml.
+         # output everything you're sending and receiving in JSON pretty print
+         set_debug(true).
+         # optional 3rd parameter available: shared_secret for 2 factor auth
+         login(user, pass)
 
-params = { :domain => "mydomain.com" }
+object = 'domain'
+method = 'check'
 
-result = domrobot.call(object, method, params)
+params = { domain: 'mydomain.com' }
 
-puts YAML::dump(result)
+if result['code'] == 1000
+  result = domrobot.call(object, method, params)
+
+  domrobot.logout
+end
+
+pp result
