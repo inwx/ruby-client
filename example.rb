@@ -21,8 +21,8 @@ result = domrobot.set_language('en').
          # use_xml.
          # output everything you're sending and receiving in JSON pretty print
          show_debug(true).
-         # optional 3rd parameter available: shared_secret for 2 factor auth
-         login(user, pass)
+         # optional parameter: shared_secret for 2 factor auth (Base32 secret key)
+         login(username: user, password: pass)
 
 object = 'domain'
 method = 'check'
