@@ -20,7 +20,7 @@ result = domrobot.set_language('en').
          # or use the XML-RPC API instead
          # use_xml.
          # output everything you're sending and receiving in JSON pretty print
-         set_debug(true).
+         show_debug(true).
          # optional 3rd parameter available: shared_secret for 2 factor auth
          login(user, pass)
 

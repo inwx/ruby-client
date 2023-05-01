@@ -7,8 +7,10 @@ require 'net/https'
 require 'rotp'
 
 module INWX
+  # Domain Robot class
   class Domrobot
     attr_accessor :client, :cookie, :language, :api_type, :url, :debug
+
     URL_LIVE = 'api.domrobot.com'
     URL_OTE = 'api.ote.domrobot.com'
     TYPE_JSON = '/jsonrpc/'
@@ -47,7 +49,7 @@ module INWX
       self
     end
 
-    def set_debug(value)
+    def show_debug(value)
       self.debug = value
       self
     end
@@ -61,7 +63,7 @@ module INWX
       end
     end
 
-    def login(username = false, password = false, shared_secret = nil)
+    def login(username: false, password: false, shared_secret: nil)
       create_client
 
       params = { user: username, pass: password, lang: language }
@@ -89,10 +91,10 @@ module INWX
 
     def call_xml(object, method, params = {})
       client.cookie = cookie
-      res = client.call(object + '.' + method, params)
+      res = client.call("#{object}.#{method}", params)
 
       save_cookie(client.cookie)
-      debug_sent = { method: object + '.' + method, params: params }
+      debug_sent = { method: "#{object}.#{method}", params: params }
       output_debug(debug_sent.to_json, res.to_json)
 
       res
@@ -101,7 +103,7 @@ module INWX
     def call_json(object, method, params = {})
       req = Net::HTTP::Post.new(api_type)
 
-      json_params = { method: object + '.' + method, params: params }
+      json_params = { method: "#{object}.#{method}", params: params }
 
       req.body = json_params.to_json
       req['Cookie'] = cookie
@@ -118,13 +120,13 @@ module INWX
     end
 
     def output_debug(sent, received)
-      if debug
-        puts 'Sent:'
-        puts JSON.pretty_generate(JSON.parse(sent))
-        puts 'Received:'
-        puts JSON.pretty_generate(JSON.parse(received))
-        puts '-------------------------'
-      end
+      return unless debug
+
+      puts 'Sent:'
+      puts JSON.pretty_generate(JSON.parse(sent))
+      puts 'Received:'
+      puts JSON.pretty_generate(JSON.parse(received))
+      puts '-------------------------'
     end
 
     def get_secret_code(shared_secret)
