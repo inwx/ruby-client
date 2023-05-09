@@ -38,7 +38,7 @@ domrobot = INWX::Domrobot.new
 result = domrobot.set_language('en').
          use_ote.
          use_json.
-         set_debug(true).
+         show_debug(true).
          login(user, pass)
 
 object = 'domain'

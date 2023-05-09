@@ -1,13 +1,11 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.8.0)
-      public_suffix (>= 2.0.2, < 5.0)
-    json (2.3.0)
-    public_suffix (4.0.6)
-    rotp (5.1.0)
-      addressable (~> 2.5)
-    xmlrpc (0.3.0)
+    json (2.6.3)
+    rotp (6.2.2)
+    webrick (1.8.1)
+    xmlrpc (0.3.2)
+      webrick
 
 PLATFORMS
   ruby
@@ -18,4 +16,4 @@ DEPENDENCIES
   xmlrpc
 
 BUNDLED WITH
-   1.16.1
+   2.3.17
