@@ -14,6 +14,6 @@ Gem::Specification.new do |s|
   s.license               = 'MIT'
 
   s.add_runtime_dependency 'json', '~> 2.6.3', '>= 2.6.0'
-  s.add_runtime_dependency 'rotp', '~> 6.2.2', '>= 6.2.0'
+  s.add_runtime_dependency 'rotp', '>= 6.2.2', '< 6.4.0'
   s.add_runtime_dependency 'xmlrpc', '~> 0.3.2', '>= 0.3.0'
 end

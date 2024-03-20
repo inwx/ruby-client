@@ -2,7 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     json (2.6.3)
-    rotp (6.2.2)
+    rotp (6.3.0)
     webrick (1.8.1)
     xmlrpc (0.3.2)
       webrick
